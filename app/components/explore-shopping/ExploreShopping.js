@@ -2,40 +2,30 @@ import { View, StyleSheet } from 'react-native';
 import React from 'react';
 import PropTypes from 'prop-types';
 import ShoppingStorage from '../../services/shopping-storage';
-import Text from '../Text';
+import ShoppingList from './ShoppingList';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: 'column',
-  },
-  logo: {
-    flex: 2,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  buttonGroup: {
-    justifyContent: 'flex-end',
   },
 });
 
 class ExploreShopping extends React.Component {
   state = {
-    allProducts: [],
+    shopping: [],
   };
 
   async componentWillMount() {
-    const allProducts = await ShoppingStorage.getShopping();
-    this.setState({ allProducts });
+    const shopping = await ShoppingStorage.getShopping();
+    this.setState({ shopping });
   }
 
 
   render() {
-    const { allProducts } = this.state;
-    console.log(allProducts);
+    const { shopping } = this.state;
     return (
       <View style={styles.container}>
-        <Text medium>Produktów: {allProducts.length}</Text>
+        <ShoppingList shopping={shopping}/>
       </View>
     );
   }
