@@ -7,10 +7,6 @@ import Text from '../Text';
 import PopupDialog from '../PopupDialog';
 
 class ProductNotFound extends React.Component {
-  componentDidMount() {
-    this.popupDialog.show();
-  }
-
   render() {
     const { onClose } = this.props;
     return (
