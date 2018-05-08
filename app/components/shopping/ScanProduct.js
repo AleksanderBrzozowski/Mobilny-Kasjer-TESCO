@@ -1,13 +1,8 @@
 import React from 'react';
-import { StyleSheet, PermissionsAndroid } from 'react-native';
+import { PermissionsAndroid } from 'react-native';
 import { RNCamera } from 'react-native-camera';
 import PropTypes from 'prop-types';
-
-const styles = StyleSheet.create({
-  camera: {
-    flex: 1,
-  },
-});
+import globalStyles from '../../styles';
 
 class ScanProduct extends React.Component {
   static propTypes = {
@@ -37,7 +32,7 @@ class ScanProduct extends React.Component {
     return (
       <RNCamera
         type={RNCamera.Constants.Type.back}
-        style={styles.camera}
+        style={globalStyles.container}
         onBarCodeRead={({ data }) => this.onBarCodeRead(data)}
         barCodeTypes={[RNCamera.Constants.BarCodeType.ean13]}
       />

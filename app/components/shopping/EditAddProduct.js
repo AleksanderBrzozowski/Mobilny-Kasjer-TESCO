@@ -6,6 +6,7 @@ import Button from '../Button';
 import colors from '../../colors';
 import Text from '../Text';
 import PopupDialog from '../PopupDialog';
+import globalStyles from '../../styles';
 
 const titlesByType = {
   add: 'Dodaj produkt',
@@ -13,9 +14,6 @@ const titlesByType = {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
   productWrapper: {
     flex: 1,
     alignItems: 'center',
@@ -48,7 +46,7 @@ class EditAddProduct extends React.Component {
     const { amount } = this.state;
     return (
       <PopupDialog height={0.66} title={titlesByType[type]}>
-        <View style={styles.container}>
+        <View style={globalStyles.container}>
           <View style={styles.productWrapper}>
             <Text bold center color="primary" medium>{product.name}</Text>
             <Image

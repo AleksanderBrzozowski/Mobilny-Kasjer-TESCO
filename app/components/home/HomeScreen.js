@@ -3,31 +3,23 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import TescoLogo from '../../assets/tesco.png';
 import Button from '../Button';
+import globalStyles from '../../styles';
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: 'column',
-  },
   logo: {
     flex: 2,
     alignItems: 'center',
     justifyContent: 'center',
   },
-  buttonGroup: {
-    justifyContent: 'flex-end',
-  },
 });
 
 const HomeScreen = ({ navigation }) => (
-      <View style={styles.container}>
+      <View style={globalStyles.container}>
         <View style={styles.logo}>
           <Image source={TescoLogo} />
         </View>
-        <View style={styles.buttonGroup}>
-          <Button onPress={() => navigation.navigate('Shopping')} title="Rozpocznij zakupy" />
-          <Button onPress={() => navigation.navigate('ExploreShopping')} title="Przeglądaj zakupy" color="secondary" />
-        </View>
+        <Button onPress={() => navigation.navigate('Shopping')} title="Rozpocznij zakupy" />
+        <Button onPress={() => navigation.navigate('ExploreShopping')} title="Przeglądaj zakupy" color="secondary" />
       </View>
 );
 

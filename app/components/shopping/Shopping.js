@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { View } from 'react-native';
 import PropTypes from 'prop-types';
 import ProductsList from '../products/ProductsList';
 import EditAddProduct from './EditAddProduct';
@@ -9,15 +9,7 @@ import Button from '../Button';
 import Text from '../Text';
 import ShoppingStorage from '../../services/shopping-storage';
 import ProductsService from '../../services/products-service';
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  productList: {
-    flex: 1,
-  },
-});
+import globalStyles from '../../styles';
 
 class Shopping extends React.Component {
   static propTypes = {
@@ -86,8 +78,8 @@ class Shopping extends React.Component {
     } = this.state;
 
     return (
-      <View style={styles.container}>
-        <View style={styles.productList}>
+      <View style={globalStyles.container}>
+        <View style={globalStyles.container}>
           <ProductsList
             products={products}
             onRemove={this.removeProduct}
