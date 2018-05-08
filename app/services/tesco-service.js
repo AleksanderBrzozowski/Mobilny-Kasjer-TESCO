@@ -1,5 +1,7 @@
+import Config from 'react-native-config';
+
 const apiUrl = 'https://dev.tescolabs.com/';
-const headers = { 'Ocp-Apim-Subscription-Key': process.env.API_KEY };
+const headers = { 'Ocp-Apim-Subscription-Key': Config.API_KEY };
 
 const productSearchParams = productDescription =>
   `query=${encodeURIComponent(productDescription)}&offset=0&limit=1`;

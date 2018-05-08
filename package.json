@@ -4,35 +4,34 @@
   "private": true,
   "devDependencies": {
     "babel-eslint": "^8.2.3",
+    "babel-preset-react-native-stage-0": "^1.0.1",
     "eslint": "^4.19.1",
     "eslint-plugin-import": "^2.11.0",
     "eslint-plugin-react": "^7.7.0",
-    "jest-expo": "26.0.0",
-    "react-native-scripts": "1.13.2",
+    "jest": "^22.4.3",
+    "jest-react-native": "^18.0.0",
     "react-test-renderer": "16.3.0-alpha.1"
   },
-  "main": "./node_modules/react-native-scripts/build/bin/crna-entry.js",
   "scripts": {
-    "start": "react-native-scripts start",
-    "eject": "react-native-scripts eject",
-    "android": "react-native-scripts android",
-    "ios": "react-native-scripts ios",
+    "start": "react-native start",
+    "android": "react-native run-android",
+    "ios": "react-native run-ios",
     "test": "jest"
   },
   "jest": {
-    "preset": "jest-expo"
+    "preset": "react-native"
   },
   "dependencies": {
-    "babel-plugin-transform-inline-environment-variables": "^0.4.1",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-plugin-react-native": "^3.2.1",
-    "expo": "^26.0.0",
     "prop-types": "^15.6.1",
     "react": "16.3.0",
     "react-native": "~0.54.1",
     "react-native-camera": "^1.1.2",
+    "react-native-config": "^0.11.5",
     "react-native-elements": "^0.19.1",
     "react-native-popup-dialog": "^0.11.46",
+    "react-native-vector-icons": "^4.6.0",
     "react-navigation": "^1.5.11"
   }
 }

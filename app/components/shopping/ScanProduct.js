@@ -1,6 +1,6 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
-import { Camera, Permissions } from 'expo';
+import { StyleSheet, PermissionsAndroid } from 'react-native';
+import { RNCamera } from 'react-native-camera';
 import PropTypes from 'prop-types';
 
 const styles = StyleSheet.create({
@@ -19,18 +19,18 @@ class ScanProduct extends React.Component {
   };
 
   async componentWillMount() {
-    const { status } = await Permissions.askAsync(Permissions.CAMERA);
-    this.setState({ hasCameraPermission: status === 'granted' });
+    const { status } = await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.CAMERA);
+    this.setState({ hasCameraPermission: status === PermissionsAndroid.RESULTS.GRANTED });
   }
 
   render() {
     const { onBarCodeRead } = this.props;
     return (
-      <Camera
-        type={Camera.Constants.Type.back}
+      <RNCamera
+        type={RNCamera.Constants.Type.back}
         style={styles.camera}
         onBarCodeRead={({ data }) => onBarCodeRead(data)}
-        barCodeTypes={[Camera.Constants.BarCodeType.ean13]}
+        barCodeTypes={[RNCamera.Constants.BarCodeType.ean13]}
       />
     );
   }
