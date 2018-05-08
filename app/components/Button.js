@@ -10,7 +10,6 @@ const Button = ({ color, ...props }) => (
     <RNEButton
       {...props}
       backgroundColor={colors[color]}
-      raised
     />
   </View>
 );

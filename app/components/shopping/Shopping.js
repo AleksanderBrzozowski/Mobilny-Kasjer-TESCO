@@ -1,7 +1,6 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import PropTypes from 'prop-types';
-import ScanProduct from './ScanProduct';
 import ProductsList from './ProductsList';
 import EditAddProduct from './EditAddProduct';
 import TescoService from '../../services/tesco-service';
@@ -21,7 +20,7 @@ const styles = StyleSheet.create({
 class Shopping extends React.Component {
   static propTypes = {
     navigation: PropTypes.shape({
-      setParams: PropTypes.func.isRequired,
+      navigate: PropTypes.func.isRequired,
     }).isRequired,
   };
 
@@ -31,14 +30,12 @@ class Shopping extends React.Component {
 
   state = {
     products: [],
-    scanProduct: false,
     productNotFound: false,
     productToAdd: null,
     productToEdit: null,
   };
 
   onBarCodeRead = (barCode) => {
-    this.setState({ scanProduct: false });
     TescoService.findProductByEan(barCode)
       .then((productToAdd) => {
         const { products } = this.state;
@@ -79,14 +76,10 @@ class Shopping extends React.Component {
   }
 
   render() {
+    const { navigation } = this.props;
     const {
-      products, scanProduct, productToAdd,
-      productNotFound, productToEdit,
+      products, productToAdd, productNotFound, productToEdit,
     } = this.state;
-
-    if (scanProduct) {
-      return <ScanProduct onBarCodeRead={this.onBarCodeRead} />;
-    }
 
     return (
       <View style={styles.container}>
@@ -98,7 +91,7 @@ class Shopping extends React.Component {
           />
         </View>
         <Text medium bold center>Suma: {this.totalPrice().toFixed(2)} GBP</Text>
-        <Button title="Dodaj produkt" onPress={() => this.setState({ scanProduct: true })} />
+        <Button title="Dodaj produkt" onPress={() => navigation.navigate('ScanProduct', { onBarCodeRead: this.onBarCodeRead })} />
         {productToAdd &&
           <EditAddProduct onOk={this.confirmProduct}
                           onCancel={() => this.setState({ productToAdd: null })}

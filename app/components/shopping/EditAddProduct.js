@@ -17,9 +17,8 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   productWrapper: {
-    flex: 0.8,
+    flex: 1,
     alignItems: 'center',
-    justifyContent: 'space-between',
   },
   productAmountIconsWrapper: {
     flexDirection: 'row',
@@ -48,10 +47,10 @@ class EditAddProduct extends React.Component {
     } = this.props;
     const { amount } = this.state;
     return (
-      <PopupDialog height={0.8} title={titlesByType[type]}>
+      <PopupDialog height={0.66} title={titlesByType[type]}>
         <View style={styles.container}>
           <View style={styles.productWrapper}>
-            <Text bold center color="primary" large>{product.name}</Text>
+            <Text bold center color="primary" medium>{product.name}</Text>
             <Image
               source={{ uri: product.image }}
               style={{ width: 90, height: 90 }}

@@ -11,7 +11,11 @@ const styles = StyleSheet.create({
 
 class ScanProduct extends React.Component {
   static propTypes = {
-    onBarCodeRead: PropTypes.func.isRequired,
+    navigation: PropTypes.shape({}).isRequired,
+  };
+
+  static navigationOptions = {
+    header: null,
   };
 
   state = {
@@ -23,13 +27,18 @@ class ScanProduct extends React.Component {
     this.setState({ hasCameraPermission: status === PermissionsAndroid.RESULTS.GRANTED });
   }
 
+  onBarCodeRead = (barcode) => {
+    const { navigation } = this.props;
+    navigation.goBack();
+    navigation.state.params.onBarCodeRead(barcode);
+  };
+
   render() {
-    const { onBarCodeRead } = this.props;
     return (
       <RNCamera
         type={RNCamera.Constants.Type.back}
         style={styles.camera}
-        onBarCodeRead={({ data }) => onBarCodeRead(data)}
+        onBarCodeRead={({ data }) => this.onBarCodeRead(data)}
         barCodeTypes={[RNCamera.Constants.BarCodeType.ean13]}
       />
     );

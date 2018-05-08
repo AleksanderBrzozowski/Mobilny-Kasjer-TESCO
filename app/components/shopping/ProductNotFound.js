@@ -9,12 +9,9 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   textWrapper: {
-    flex: 0.8,
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  buttonWrapper: {
-    flex: 0.2,
   },
 });
 
@@ -39,9 +36,7 @@ class ProductNotFound extends React.Component {
           <View style={styles.textWrapper}>
             <Text>Przepraszamy, nie znaleziono produktu :(</Text>
           </View>
-          <View style={styles.buttonWrapper}>
-            <Button color="primary" title="OK" onPress={onClose} />
-          </View>
+          <Button color="primary" title="OK" onPress={onClose} />
         </View>
       </PopupDialog>
     );
