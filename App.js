@@ -5,6 +5,7 @@ import Shopping from './app/components/shopping/Shopping';
 import colors from './app/colors';
 import ScanProduct from './app/components/shopping/ScanProduct';
 import ExploreShopping from './app/components/explore-shopping/ExploreShopping';
+import ShoppingProducts from './app/components/explore-shopping/ShoppingProducts';
 
 const RootStack = StackNavigator(
   {
@@ -12,6 +13,7 @@ const RootStack = StackNavigator(
     Shopping: { screen: Shopping },
     ScanProduct: { screen: ScanProduct },
     ExploreShopping: { screen: ExploreShopping },
+    ShoppingProducts: { screen: ShoppingProducts },
   },
   {
     initialRouteName: 'Home',

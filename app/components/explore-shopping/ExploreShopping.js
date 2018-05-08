@@ -1,14 +1,9 @@
-import { View, StyleSheet } from 'react-native';
+import { View } from 'react-native';
 import React from 'react';
 import PropTypes from 'prop-types';
 import ShoppingStorage from '../../services/shopping-storage';
 import ShoppingList from './ShoppingList';
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});
+import globalStyles from '../../styles';
 
 class ExploreShopping extends React.Component {
   state = {
@@ -23,9 +18,13 @@ class ExploreShopping extends React.Component {
 
   render() {
     const { shopping } = this.state;
+    const { navigation } = this.props;
     return (
-      <View style={styles.container}>
-        <ShoppingList shopping={shopping}/>
+      <View style={globalStyles.container}>
+        <ShoppingList
+          shopping={shopping}
+          onItemPress={item => navigation.navigate('ShoppingProducts', { products: item.products })}
+        />
       </View>
     );
   }

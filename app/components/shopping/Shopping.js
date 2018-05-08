@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import PropTypes from 'prop-types';
-import ProductsList from './ProductsList';
+import ProductsList from '../products/ProductsList';
 import EditAddProduct from './EditAddProduct';
 import TescoService from '../../services/tesco-service';
 import ProductNotFound from './ProductNotFound';

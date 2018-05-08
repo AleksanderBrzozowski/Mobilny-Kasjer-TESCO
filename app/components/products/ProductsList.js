@@ -3,7 +3,7 @@ import { FlatList, View, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
 import { Icon, List, ListItem } from 'react-native-elements';
 import colors from '../../colors';
-import RemoveProduct from './RemoveProduct';
+import RemoveProduct from '../shopping/RemoveProduct';
 
 const styles = StyleSheet.create({
   rightIconsWrapper: {
@@ -13,6 +13,25 @@ const styles = StyleSheet.create({
   },
 });
 
+const ProductActions = ({ onRemove, onEdit }) => (
+  <View style={styles.rightIconsWrapper}>
+    <Icon
+      name="edit"
+      color={colors.primary}
+      onPress={onEdit}
+    />
+    <Icon
+      name="delete"
+      color={colors.secondary}
+      onPress={onRemove} />
+  </View>
+);
+
+ProductActions.propTypes = {
+  onRemove: PropTypes.func.isRequired,
+  onEdit: PropTypes.func.isRequired,
+};
+
 class ProductsList extends React.Component {
   state = {
     productToRemove: null,
@@ -21,6 +40,7 @@ class ProductsList extends React.Component {
   render() {
     const { products, onRemove, onEdit } = this.props;
     const { productToRemove } = this.state;
+    const isEditable = onRemove && onEdit;
     return (
       <View>
         <List>
@@ -32,19 +52,13 @@ class ProductsList extends React.Component {
                 title={item.name}
                 subtitle={`${item.price} x ${item.amount} = ${(item.amount * item.price).toFixed(2)} GBP`}
                 avatar={{ uri: item.image }}
-                rightIcon={(
-                  <View style={styles.rightIconsWrapper}>
-                    <Icon
-                      name="edit"
-                      color={colors.primary}
-                      onPress={() => onEdit(item)}
-                    />
-                    <Icon
-                      name="delete"
-                      color={colors.secondary}
-                      onPress={() => this.setState({ productToRemove: item })} />
-                  </View>
-                )}
+                rightIcon={ isEditable ?
+                  <ProductActions
+                    onRemove={() => this.setState({ productToRemove: item })}
+                    onEdit={() => onEdit(item)}
+                  /> :
+                  <View />
+                }
               />
             )}
             keyExtractor={(item, index) => `${index}`}
@@ -66,8 +80,8 @@ class ProductsList extends React.Component {
 
 ProductsList.propTypes = {
   products: PropTypes.array.isRequired,
-  onRemove: PropTypes.func.isRequired,
-  onEdit: PropTypes.func.isRequired,
+  onRemove: PropTypes.func,
+  onEdit: PropTypes.func,
 };
 
 export default ProductsList;

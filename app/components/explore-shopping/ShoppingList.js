@@ -10,7 +10,7 @@ class ShoppingList extends React.Component {
   };
 
   render() {
-    const { shopping } = this.props;
+    const { shopping, onItemPress } = this.props;
     return (
       <View>
         <List>
@@ -21,6 +21,7 @@ class ShoppingList extends React.Component {
                 roundAvatar
                 title={item.date}
                 subtitle={`${ProductsService.productsTotalPrice(item.products)} GBP`}
+                onPress={() => onItemPress(item)}
               />
             )}
             keyExtractor={(item, index) => `${index}`}
@@ -33,6 +34,7 @@ class ShoppingList extends React.Component {
 
 ShoppingList.propTypes = {
   shopping: PropTypes.array.isRequired,
+  onItemPress: PropTypes.func.isRequired,
 };
 
 export default ShoppingList;
