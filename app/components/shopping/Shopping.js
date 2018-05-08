@@ -7,6 +7,8 @@ import TescoService from '../../services/tesco-service';
 import ProductNotFound from './ProductNotFound';
 import Button from '../Button';
 import Text from '../Text';
+import ShoppingStorage from '../../services/shopping-storage';
+import ProductsService from '../../services/products-service';
 
 const styles = StyleSheet.create({
   container: {
@@ -21,6 +23,7 @@ class Shopping extends React.Component {
   static propTypes = {
     navigation: PropTypes.shape({
       navigate: PropTypes.func.isRequired,
+      goBack: PropTypes.func.isRequired,
     }).isRequired,
   };
 
@@ -67,13 +70,14 @@ class Shopping extends React.Component {
     this.setState({ products: productsCopy, productToEdit: null });
   };
 
-  totalPrice() {
+  saveShopping = async () => {
+    const { navigation } = this.props;
     const { products } = this.state;
-    return products.reduce(
-      (prev, current) => prev + (current.price * current.amount),
-      0,
-    );
-  }
+    if (products !== []) {
+      await ShoppingStorage.saveShopping(products);
+    }
+    navigation.goBack();
+  };
 
   render() {
     const { navigation } = this.props;
@@ -90,8 +94,9 @@ class Shopping extends React.Component {
             onEdit={product => this.setState({ productToEdit: product })}
           />
         </View>
-        <Text medium bold center>Suma: {this.totalPrice().toFixed(2)} GBP</Text>
+        <Text medium bold center>Suma: {ProductsService.productsTotalPrice(products)} GBP</Text>
         <Button title="Dodaj produkt" onPress={() => navigation.navigate('ScanProduct', { onBarCodeRead: this.onBarCodeRead })} />
+        <Button title="Zapisz zakupy" color="secondary" onPress={this.saveShopping} />
         {productToAdd &&
           <EditAddProduct onOk={this.confirmProduct}
                           onCancel={() => this.setState({ productToAdd: null })}

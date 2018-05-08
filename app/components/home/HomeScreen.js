@@ -26,7 +26,7 @@ const HomeScreen = ({ navigation }) => (
         </View>
         <View style={styles.buttonGroup}>
           <Button onPress={() => navigation.navigate('Shopping')} title="Rozpocznij zakupy" />
-          <Button onPress={() => {}} title="Przeglądaj zakupy" color="secondary" />
+          <Button onPress={() => navigation.navigate('ExploreShopping')} title="Przeglądaj zakupy" color="secondary" />
         </View>
       </View>
 );
